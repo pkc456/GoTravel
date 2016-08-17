@@ -24,7 +24,7 @@ class HomeTravel: NSObject {
     var logo: String?
     var idIdentifier: Int?
     var numberOfStops: Int!
-    
+    var duration: Float!
     
     func initWithDictionary(dictionary: NSDictionary) -> (AnyObject) {
         
@@ -35,8 +35,17 @@ class HomeTravel: NSObject {
         self.departureTime = dictionary[kHomeTravelDepartureTimeKey] as? String ?? ""
         self.logo = dictionary[kHomeTravelProviderLogoKey] as? String ?? ""
         self.logo = self.logo?.stringByReplacingOccurrencesOfString("{size}", withString: "63")
+        self.duration = self.setDuration(self.arrivalTime, departureTime: self.departureTime)
         
         return self
     }
     
+    //It will return duration in float (eg: 4.50)
+    func setDuration(arrivalTime : String, departureTime : String) -> Float{
+        
+        let arrivalTime = arrivalTime.stringByReplacingOccurrencesOfString(":", withString: ".")
+        let departureTime = departureTime.stringByReplacingOccurrencesOfString(":", withString: ".")
+        let duration = Float(arrivalTime)! - Float(departureTime)!
+        return duration
+    }
 }

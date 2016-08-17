@@ -36,7 +36,7 @@ class ViewControllerTableCell: UITableViewCell {
         let departureAttributedString = NSMutableAttributedString(string: String(format: "%@ ⇾ ", departureTime), attributes: departureAttribute)
 
         let arrivalAttribute = [
-            NSFontAttributeName : UIFont.systemFontOfSize(12.0),
+            NSFontAttributeName : UIFont.systemFontOfSize(14.0),
             NSForegroundColorAttributeName : UIColor.lightGrayColor(),
             ]
         let arrivalAttributedString = NSAttributedString(string: String(format: "%@", arrivalTime), attributes: arrivalAttribute)
@@ -46,9 +46,7 @@ class ViewControllerTableCell: UITableViewCell {
     }
     
     func setDurationText(homeTravelModelObject : HomeTravel){
-        let arrivalTime = homeTravelModelObject.arrivalTime.stringByReplacingOccurrencesOfString(":", withString: ".")
-        let departureTime = homeTravelModelObject.departureTime.stringByReplacingOccurrencesOfString(":", withString: ".")
-        let duration = Float(arrivalTime)! - Float(departureTime)!
+        let duration = homeTravelModelObject.duration
         var durationInString = String(format:"%.2f", duration)
         durationInString = durationInString.stringByReplacingOccurrencesOfString(".", withString: ":")
         durationInString = durationInString + " h "
