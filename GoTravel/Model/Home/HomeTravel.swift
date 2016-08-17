@@ -23,7 +23,7 @@ class HomeTravel: NSObject {
     var departureTime: String!
     var logo: String?
     var idIdentifier: Int?
-    var numberOfStops: Int?
+    var numberOfStops: Int!
     
     
     func initWithDictionary(dictionary: NSDictionary) -> (AnyObject) {

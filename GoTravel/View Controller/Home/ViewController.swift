@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Utility.showAlertWithTitle("Error", message: DetailNotImplemented)
+        Utility.showAlertWithTitle("", message: DetailNotImplemented)
 
     }
 

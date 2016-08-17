@@ -21,7 +21,7 @@ class ViewControllerTableCell: UITableViewCell {
     {
         labelPrice.text = "€ \(homeTravelModelObject.price)"
         self.setAttributedTextOnTimeLabel(homeTravelModelObject.departureTime, arrivalTime: homeTravelModelObject.arrivalTime)
-//        labelDuration.text = ""
+        self.setDurationText(homeTravelModelObject)
         
         let url: NSURL = NSURL(string: homeTravelModelObject.logo!)!
         let placeHolder : UIImage = UIImage(named:"thumbnail")!
@@ -43,6 +43,19 @@ class ViewControllerTableCell: UITableViewCell {
         
         departureAttributedString.appendAttributedString(arrivalAttributedString)
         labelTime.attributedText = departureAttributedString
+    }
+    
+    func setDurationText(homeTravelModelObject : HomeTravel){
+        let arrivalTime = homeTravelModelObject.arrivalTime.stringByReplacingOccurrencesOfString(":", withString: ".")
+        let departureTime = homeTravelModelObject.departureTime.stringByReplacingOccurrencesOfString(":", withString: ".")
+        let duration = Float(arrivalTime)! - Float(departureTime)!
+        var durationInString = String(format:"%.2f", duration)
+        durationInString = durationInString.stringByReplacingOccurrencesOfString(".", withString: ":")
+        durationInString = durationInString + " h "
+        
+        let stops = homeTravelModelObject.numberOfStops > 0 ? "\(homeTravelModelObject.numberOfStops) stops" : "Direct"
+        
+        labelDuration.text = "\(durationInString)| \(stops)"
     }
     
 }
