@@ -8,5 +8,6 @@ target 'GoTravel' do
   # Pods for GoTravel
 
     pod 'Alamofire'
+    pod 'AlamofireImage'
 
 end

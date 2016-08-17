@@ -8,24 +8,41 @@
 
 import Foundation
 import UIKit
-//import AlamofireImage
+import AlamofireImage
 
 class ViewControllerTableCell: UITableViewCell {
     
     @IBOutlet weak var imageviewAirline: UIImageView!
+    @IBOutlet weak var labelPrice: UILabel!
+    @IBOutlet weak var labelTime: UILabel!
+    @IBOutlet weak var labelDuration: UILabel!
  
     func configureCellWithData(homeTravelModelObject : HomeTravel)
     {
-//        let imageName_Sms = notificationPreferenceModelObject.smsSelected == true ? "sms_selected" : "sms_unselected"
-//        buttonSms.setImage(UIImage(named: imageName_Sms), forState: .Normal)
-//        buttonSms.selected = notificationPreferenceModelObject.smsSelected == true ? true : false
-//        let imageName_Email = notificationPreferenceModelObject.emailSelected == true ? "email_selected" : "email_unselected"
-//        btnEmail.setImage(UIImage(named: imageName_Email), forState: .Normal)
-//        btnEmail.selected = notificationPreferenceModelObject.emailSelected == true ? true : false
+        labelPrice.text = "€ \(homeTravelModelObject.price)"
+        self.setAttributedTextOnTimeLabel(homeTravelModelObject.departureTime, arrivalTime: homeTravelModelObject.arrivalTime)
+//        labelDuration.text = ""
         
-//        self.imageviewAirline.af_
-        //            cell.imageView.af_setImageWithURL(url, placeholderImage: placeHolder)
+        let url: NSURL = NSURL(string: homeTravelModelObject.logo!)!
+        let placeHolder : UIImage = UIImage(named:"thumbnail")!
+        self.imageviewAirline.af_setImageWithURL(url, placeholderImage: placeHolder)
+    }
+    
+    func setAttributedTextOnTimeLabel(departureTime : String, arrivalTime : String){
+        let departureAttribute = [
+            NSFontAttributeName : UIFont.systemFontOfSize(14.0),
+            NSForegroundColorAttributeName : UIColor.blackColor(),
+        ]
+        let departureAttributedString = NSMutableAttributedString(string: String(format: "%@ ⇾ ", departureTime), attributes: departureAttribute)
 
+        let arrivalAttribute = [
+            NSFontAttributeName : UIFont.systemFontOfSize(12.0),
+            NSForegroundColorAttributeName : UIColor.lightGrayColor(),
+            ]
+        let arrivalAttributedString = NSAttributedString(string: String(format: "%@", arrivalTime), attributes: arrivalAttribute)
+        
+        departureAttributedString.appendAttributedString(arrivalAttributedString)
+        labelTime.attributedText = departureAttributedString
     }
     
 }

@@ -10,8 +10,17 @@ import Foundation
 
 class HomeTravel: NSObject {
     
-    var arrivalTime: String?
-    var departureTime: String?
+    // MARK: Declaration for string constants to be used to decode and also serialize.
+    let kHomeTravelPriceKey: String = "price_in_euros"
+    let kHomeTravelIdKey: String = "id"
+    let kHomeTravelNumberOfStopsKey: String = "number_of_stops"
+    let kHomeTravelArrivalTimeKey: String = "arrival_time"
+    let kHomeTravelDepartureTimeKey: String = "departure_time"
+    let kHomeTravelProviderLogoKey: String = "provider_logo"
+        
+    var price: String!
+    var arrivalTime: String!
+    var departureTime: String!
     var logo: String?
     var idIdentifier: Int?
     var numberOfStops: Int?
@@ -19,11 +28,13 @@ class HomeTravel: NSObject {
     
     func initWithDictionary(dictionary: NSDictionary) -> (AnyObject) {
         
-        self.idIdentifier = dictionary["id"]?.integerValue ?? 0
-        self.numberOfStops = dictionary["number_of_stops"]?.integerValue ?? 0
-        self.arrivalTime = dictionary["arrival_time"] as? String ?? ""
-        self.logo = dictionary["provider_logo"] as? String ?? ""
-        self.departureTime = dictionary["departure_time"] as? String ?? ""
+        self.idIdentifier = dictionary[kHomeTravelIdKey]?.integerValue ?? 0
+        self.numberOfStops = dictionary[kHomeTravelNumberOfStopsKey]?.integerValue ?? 0
+        self.price = dictionary[kHomeTravelPriceKey] as? String ?? ""
+        self.arrivalTime = dictionary[kHomeTravelArrivalTimeKey] as? String ?? ""
+        self.departureTime = dictionary[kHomeTravelDepartureTimeKey] as? String ?? ""
+        self.logo = dictionary[kHomeTravelProviderLogoKey] as? String ?? ""
+        self.logo = self.logo?.stringByReplacingOccurrencesOfString("{size}", withString: "63")
         
         return self
     }
