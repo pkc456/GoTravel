@@ -46,16 +46,22 @@ class ViewController: UIViewController, UIActionSheetDelegate {
     
     // MARK: Web service interaction
     func fetchTravelOption(travelTypeOption : TravelType){
+        self.arrayTravelOptions.removeAll()
+
         GAWebServiceHandler.sharedInstance.fetchTravelOptionsList(travelTypeOption, showLoader:true, successBlock: { (result) in
-            self.arrayTravelOptions.removeAll()
-            self.arrayTravelOptions = result!.mutableCopy() as! [HomeTravel]                        
-            self.labelNoDataFound.hidden = self.arrayTravelOptions.count > 0 ? true : false
-            self.buttonSort.enabled = self.arrayTravelOptions.count > 0 ? true : false
+            self.arrayTravelOptions = result!.mutableCopy() as! [HomeTravel]
+            self.updateUIElements()
             self.tableviewData.reloadData()
             }) { (error) in
+                self.updateUIElements()
         }
     }
     
+    func updateUIElements(){
+        self.labelNoDataFound.hidden = self.arrayTravelOptions.count > 0 ? true : false
+        self.buttonSort.enabled = self.arrayTravelOptions.count > 0 ? true : false
+        self.tableviewData.hidden = self.arrayTravelOptions.count > 0 ? false : true
+    }
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView,
