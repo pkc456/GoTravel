@@ -15,24 +15,15 @@ class Utility: NSObject {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         activityBaseView.frame=(appDelegate.window?.frame)!
-        
         activityBaseView.backgroundColor=UIColor.whiteColor()
-        activityBaseView.alpha=0.8;
-        
+        activityBaseView.alpha=0.6;        
         
         let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-        activityIndicator.frame = CGRectMake(activityBaseView.frame.size.width/2-20, activityBaseView.frame.size.height/2-150, 40.0, 40.0);
-        //activityIndicator.center = activityBaseView.center
+        activityIndicator.center = activityBaseView.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         activityBaseView.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        
-        let imageView:UIImageView=UIImageView(frame:CGRectMake(activityBaseView.frame.size.width/2-50, activityBaseView.frame.size.height/2-50, 100, 80))
-        imageView.image=UIImage(named: "LoaderLogo")
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
-        activityBaseView.addSubview(imageView)
-        
         
         appDelegate.window?.addSubview(activityBaseView)
     }

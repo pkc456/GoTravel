@@ -85,14 +85,22 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="xgX-39-Jlr"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" text="No data found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRV-jI-6Kv">
+                                <rect key="frame" x="106" y="242" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lbg-I2-03U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9hN-bn-Gc0"/>
+                            <constraint firstItem="pRV-jI-6Kv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HrM-Rm-ovD"/>
                             <constraint firstItem="lbg-I2-03U" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="acc-17-2pa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lbg-I2-03U" secondAttribute="bottom" id="akd-da-SB9"/>
                             <constraint firstItem="lbg-I2-03U" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="b9z-Mf-mf3"/>
                             <constraint firstItem="lbg-I2-03U" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="hJB-mP-mzX"/>
+                            <constraint firstItem="pRV-jI-6Kv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pyd-z9-QBz"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -123,6 +131,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="buttonSort" destination="YbN-Yi-qgs" id="yJE-8D-zCx"/>
+                        <outlet property="labelNoDataFound" destination="pRV-jI-6Kv" id="VM3-YU-t1z"/>
                         <outlet property="tableviewData" destination="lbg-I2-03U" id="lZW-Yc-sdR"/>
                     </connections>
                 </viewController>

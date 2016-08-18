@@ -78,7 +78,7 @@ class GAWebServiceHandler: NSObject {
             }
             else{
                 let error = response as! NSError
-                Utility.showAlertWithTitle("Error", message: error.debugDescription)
+                Utility.showAlertWithTitle("Error", message: error.localizedDescription)
                 failureBlock(error: error)
             }
             Utility.hideLoader()

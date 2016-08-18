@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var tableviewData: UITableView!
     var arrayTravelOptions = [HomeTravel]()
+    @IBOutlet var labelNoDataFound: UILabel!
+    @IBOutlet var buttonSort: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +48,11 @@ class ViewController: UIViewController, UIActionSheetDelegate {
     func fetchTravelOption(travelTypeOption : TravelType){
         GAWebServiceHandler.sharedInstance.fetchTravelOptionsList(travelTypeOption, showLoader:true, successBlock: { (result) in
             self.arrayTravelOptions.removeAll()
-            self.arrayTravelOptions = result!.mutableCopy() as! [HomeTravel]
+            self.arrayTravelOptions = result!.mutableCopy() as! [HomeTravel]                        
+            self.labelNoDataFound.hidden = self.arrayTravelOptions.count > 0 ? true : false
+            self.buttonSort.enabled = self.arrayTravelOptions.count > 0 ? true : false
             self.tableviewData.reloadData()
             }) { (error) in
-                print("Error: %@",error)
         }
     }
     
