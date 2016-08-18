@@ -10,18 +10,15 @@ import UIKit
 
 class ViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var tableviewData: UITableView!
-    //    var arrayTravelOptions : NSMutableArray! = []
     var arrayTravelOptions = [HomeTravel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.fetchFlight()
+        self.fetchTravelOption(TravelType.TRAIN)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: Button action
@@ -30,14 +27,29 @@ class ViewController: UIViewController, UIActionSheetDelegate {
         actionSheet.showInView(self.view)
     }
     
+    
+    @IBAction func valueChangedAction(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            self.fetchTravelOption(TravelType.TRAIN)
+        case 1:
+            self.fetchTravelOption(TravelType.BUS)
+        case 2:
+            self.fetchTravelOption(TravelType.FLIGHT)
+        default:
+            break
+            
+        }
+    }
+    
     // MARK: Web service interaction
-    func fetchFlight(){
-        GAWebServiceHandler.sharedInstance.fetchFlight({ (result) in
+    func fetchTravelOption(travelTypeOption : TravelType){
+        GAWebServiceHandler.sharedInstance.fetchTravelOptionsList(travelTypeOption, showLoader:true, successBlock: { (result) in
             self.arrayTravelOptions.removeAll()
             self.arrayTravelOptions = result!.mutableCopy() as! [HomeTravel]
             self.tableviewData.reloadData()
-        }) { (error) in
-            print("Error: %@",error)
+            }) { (error) in
+                print("Error: %@",error)
         }
     }
     
@@ -81,6 +93,5 @@ class ViewController: UIViewController, UIActionSheetDelegate {
                 break;
         }
         self.tableviewData.reloadData()
-        
     }
 }

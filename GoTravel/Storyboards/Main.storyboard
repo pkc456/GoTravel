@@ -101,6 +101,19 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="fbx-Uz-uwL">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="iju-uj-3nN">
+                            <rect key="frame" x="69" y="7" width="182" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Train"/>
+                                <segment title="Bus"/>
+                                <segment title="Flight"/>
+                            </segments>
+                            <connections>
+                                <action selector="valueChangedAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="maq-Ls-Gnn"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" title="Sort" id="YbN-Yi-qgs">
                             <connections>
                                 <action selector="btnSortAction:" destination="BYZ-38-t0r" id="BAD-Dm-IaW"/>

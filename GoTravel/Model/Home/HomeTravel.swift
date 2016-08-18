@@ -18,7 +18,7 @@ class HomeTravel: NSObject {
     let kHomeTravelDepartureTimeKey: String = "departure_time"
     let kHomeTravelProviderLogoKey: String = "provider_logo"
         
-    var price: String!
+    var price: Float!
     var arrivalTime: String!
     var departureTime: String!
     var logo: String?
@@ -30,7 +30,7 @@ class HomeTravel: NSObject {
         
         self.idIdentifier = dictionary[kHomeTravelIdKey]?.integerValue ?? 0
         self.numberOfStops = dictionary[kHomeTravelNumberOfStopsKey]?.integerValue ?? 0
-        self.price = dictionary[kHomeTravelPriceKey] as? String ?? ""
+        self.price = dictionary[kHomeTravelPriceKey]?.floatValue  ?? 0.0
         self.arrivalTime = dictionary[kHomeTravelArrivalTimeKey] as? String ?? ""
         self.departureTime = dictionary[kHomeTravelDepartureTimeKey] as? String ?? ""
         self.logo = dictionary[kHomeTravelProviderLogoKey] as? String ?? ""

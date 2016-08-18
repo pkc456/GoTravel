@@ -47,14 +47,32 @@ class GAWebServiceHandler: NSObject {
     
     
     // MARK: Get notification
-    func fetchFlight(successBlock: (result: NSMutableArray?) -> Void, failureBlock:(error: NSError)->Void)
+    func fetchTravelOptionsList(travelOption : TravelType, showLoader : Bool, successBlock: (result: NSMutableArray?) -> Void, failureBlock:(error: NSError)->Void)
     {
-        Utility.showLoader()
+        var urlString = GET_Train
+        if travelOption == TravelType.BUS {
+            urlString = GET_Bus
+        }else if travelOption == TravelType.FLIGHT{
+            urlString = GET_Flight
+        }
         
-        self.getApiRequest(.GET, url: GET_Flight) { (finished, response) in
+        if showLoader == true {
+            Utility.showLoader()
+        }
+        
+        //Offline support. I used userdefault because ihave limited 3 apis data. For large data, prefer SQLIte or coredata
+        let responseArray = Utility.getValueFromUserDefaultForKey(urlString) as? NSArray
+        if(responseArray != nil){
+            let result_collection : NSMutableArray = HomeTravelBusinessLayer.sharedInstance.parseArrayJsonData(responseArray!)
+            successBlock(result: result_collection)
+            Utility.hideLoader()
+        }
+        
+        self.getApiRequest(.GET, url: urlString) { (finished, response) in
             if(finished)
             {
                 let responseArray = response as! NSArray
+                Utility.saveValueInUserDefault(responseArray, forkey: urlString)
                 let result_collection : NSMutableArray = HomeTravelBusinessLayer.sharedInstance.parseArrayJsonData(responseArray)
                 successBlock(result: result_collection)
             }
@@ -63,31 +81,8 @@ class GAWebServiceHandler: NSObject {
                 Utility.showAlertWithTitle("Error", message: error.debugDescription)
                 failureBlock(error: error)
             }
-            
             Utility.hideLoader()
         }
     }
-    /*
-    // MARK: Login
-    func postLoginWithParam(params: [String : AnyObject], successBlock: (result: NSMutableArray?) -> Void, failureBlock:(error: NSError)->Void)
-    {
-        Utility.showLoader()
-        
-        self.PostApiRequest(.POST, url: API_LOGIN, apiData: params) { (finished, response) in
-            if(finished)
-            {
-                let responseDict = response as! NSDictionary
-                print(responseDict)
-            }
-            else{
-                let error = response as! NSError
-                Utility.showAlertWithTitle("Error", message: error.debugDescription)
-                failureBlock(error: error)
-            }
-            
-            Utility.hideLoader()
-        }
-    }
-    */
     
 }

@@ -53,4 +53,17 @@ class Utility: NSObject {
         APP_DELEGATE.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
     }
     
+    //MARK: - NSUserdefault utility
+    static func saveValueInUserDefault(value : AnyObject?,forkey:String!)
+    {
+        NSUserDefaults.standardUserDefaults().setObject(value, forKey: forkey)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    static func getValueFromUserDefaultForKey(key:String!) -> AnyObject?
+    {
+        let value : AnyObject? =  NSUserDefaults.standardUserDefaults().objectForKey(key)
+        return value
+    }
+    
 }
